@@ -7,7 +7,14 @@ let nums = [parse(Int, readline()) for _ in 1:1:n]
 		b = sum(nums[k+1:end])
 		return a*b
 	end
-	l = f.(firstindex(nums):lastindex(nums)-1)
-	m = reduce(max, l)
-	print("$(m)\n")
+	last = -1
+	for i in lastindex(nums)-1:-1:firstindex(nums)
+		ans = f(i)
+		if ans < last
+			print("$(last)\n")
+			exit(0)
+		end
+		last = ans
+	end
+	print("$(last)\n")
 end
