@@ -1,0 +1,34 @@
+use/using Distributed
+
+addprocs(["user@host"], dir="DIR", exename="JULIA_LOCATION")
+
+https://docs.julialang.org/en/v1/stdlib/Distributed/
+
+() -> NO_ARG_LAMBDA
+
+fetch(future)
+	see value but don't remove it
+wait(future)
+	wait for value to be ready
+isready(FUTURE)
+	check if value is ready
+put!(FUTURE, V)
+	put value in future/remote channel
+take!(FUTURE)
+	fetch but take value out
+
+@spawnat P EXPR
+	:any to automatically decide
+	-> future
+@fetch EXPR
+	equivalent to fetch(@spawnat :any EXPR)
+@fetchfrom P EXPR
+
+x = @distributed (+) for i = 1:100
+	i^2
+end
+	the REDUCER is a (a,b)->c style function
+
+- notes -
+when defining functions that need to be used in workers, use @everwhere on the definition
+	need to add workers before this happens
